@@ -11,14 +11,15 @@ namespace DonateAPI.Controllers
         public IActionResult Donate([FromRoute]string _name, 
                                     [FromRoute]string _family, 
                                     [FromQuery]int _amount, 
-                                    [FromQuery]int _companyId)
+                                    [FromQuery]int _companyId,
+                                    [FromBody]DonateDetailsModel donateDetails)
         {
             var donation = new {
                 name = _name,
                 family = _family,
                 amount = _amount,
                 companyId = _companyId,
-                dateOfDonation = "2000-01-05T00:00",
+                dateOfDonation = donateDetails.DonateDate,
                 totalOfAllDonations = 10000
             };
             return Ok(donation);
