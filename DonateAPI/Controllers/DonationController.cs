@@ -7,6 +7,13 @@ namespace DonateAPI.Controllers
     [ApiController]
     public class DonationController : ControllerBase
     {
+        private IDonationRepository _donationRepository;
+
+        public DonationController(IDonationRepository donationRepository)
+        {
+            _donationRepository = donationRepository;
+        }
+
         [HttpPost("give")]
         public IActionResult Donate([FromRoute]string _name, 
                                     [FromRoute]string _family, 
@@ -20,7 +27,7 @@ namespace DonateAPI.Controllers
                 amount = _amount,
                 companyId = _companyId,
                 dateOfDonation = donateDetails.DonateDate,
-                totalOfAllDonations = 10000
+                totalOfAllDonations = _donationRepository.GetTotalDonationCount()
             };
             return Ok(donation);
         }

@@ -32,6 +32,8 @@ namespace DonateAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DonateAPI", Version = "v1" });
             });
+
+            services.AddSingleton <IDonationRepository, DonationRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
